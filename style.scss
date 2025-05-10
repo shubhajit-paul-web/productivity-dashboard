@@ -1,0 +1,422 @@
+:root {
+	--color-primary: #161a20;
+	--color-secondary: #22262f;
+	--color-accent: #008561;
+	--color-text-main: #eeeeeee6;
+	--color-border: #2a2d35;
+    --color-btn-red: #c23030;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background-color: var(--color-primary);
+	padding: 1.2rem;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+    user-select: none;
+}
+
+nav {
+	background-color: var(--color-secondary);
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.9rem 1.3rem;
+
+	h1 {
+		font-size: 1.3rem;
+		font-weight: 600;
+		color: var(--color-text-main);
+	}
+
+	button {
+		font-size: 1rem;
+		font-weight: 500;
+		background-color: var(--color-text-main);
+		color: var(--color-primary);
+		padding: 0.5rem 0.9rem;
+		border-radius: 8px;
+		transition: 0.3s;
+
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+}
+
+// weather widget - section
+.weather-widget {
+	// height: 16rem;
+	background-color: var(--color-secondary);
+	margin-top: 1.5rem;
+	border-radius: 15px;
+	background-image: url(./assets/images/nature-bg.jpeg);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 2rem 2.3rem;
+	display: flex;
+	justify-content: space-between;
+	color: #fff;
+	* {
+		text-shadow: 0px 0px 10px #0000001f;
+	}
+
+	.left-part {
+		.date,
+		.state {
+			font-size: 1.6rem;
+		}
+		.current-time {
+			font-size: 3.8rem;
+			font-weight: 600;
+			letter-spacing: -2.4px;
+			line-height: 1.2;
+		}
+		.state {
+			margin-top: 2.5rem;
+		}
+	}
+
+	.right-part {
+		.temperature {
+			font-size: 3rem;
+			font-weight: 600;
+			line-height: 1;
+			// text-shadow: 0px 0px 2px #0000007a;
+		}
+		.weather-status {
+			font-size: 1.7rem;
+		}
+		.more-weather-details {
+			margin-top: 2.2rem;
+		}
+	}
+}
+
+// features widget - section
+.features-widget {
+	height: fit-content;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin-top: 1.7rem;
+
+	.feature {
+		cursor: pointer;
+		background-color: var(--color-secondary);
+		border-radius: 12px;
+		padding: 1.7rem 2.6rem;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 4rem;
+		transition: 0.3s;
+
+		&:active {
+			transform: scale(0.96);
+		}
+
+		.img-bg {
+			background-color: var(--color-primary);
+			width: 10rem;
+			height: 10rem;
+			border-radius: 50%;
+			padding: 1.5rem;
+			pointer-events: none;
+		}
+		img {
+			height: 100%;
+			pointer-events: none;
+		}
+
+		p {
+			font-size: 1.4rem;
+			color: var(--color-text-main);
+			opacity: 0.9;
+			pointer-events: none;
+		}
+
+		&:nth-child(2),
+		&:nth-child(3) {
+			.img-bg {
+				padding: 2rem;
+			}
+		}
+	}
+}
+
+// full window for features
+.full-window {
+	.window {
+		width: 100vw;
+		height: 100vh;
+		background-color: var(--color-primary);
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 2rem;
+		display: none;
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 3rem;
+
+			.window-title {
+				font-size: 1.6rem;
+				color: var(--color-text-main);
+				opacity: 0.9;
+			}
+
+			.window-close-btn {
+				font-size: 1.1rem;
+				padding: 0.5rem 1.2rem;
+				border-radius: 8px;
+				background-color: rgb(194, 48, 48);
+				color: #ffffffdb;
+				transition: 0.2s;
+
+				&:hover {
+					background-color: rgb(171, 33, 33);
+				}
+
+				&:active {
+					transform: scale(0.94);
+				}
+			}
+		}
+	}
+}
+
+// temp
+.window.todo-list-window {
+	display: block;
+
+	.todo-list-container {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		gap: 1.5rem;
+
+		.left-part {
+			width: 35%;
+			background-color: var(--color-secondary);
+			padding: 1.4rem;
+			border-radius: 15px;
+			font-size: 1rem;
+			border: 2px solid var(--color-border);
+
+			.todo-list-header {
+				font-size: 1.4rem;
+				color: var(--color-text-main);
+				margin-bottom: 1.5rem;
+			}
+			input,
+			select {
+				border: none;
+				border-radius: 12px;
+				background-color: var(--color-primary);
+				border: 2px solid var(--color-border);
+				color: var(--color-text-main);
+			}
+			input[type="text"] {
+				font-size: 1rem;
+				width: 100%;
+				padding: 0.9rem 1rem;
+				margin-bottom: 1rem;
+			}
+			.input-wrapper {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+			}
+			input[type="datetime-local"],
+			select {
+				font-size: 0.9rem;
+				padding: 0.9rem 1rem;
+
+				&::-webkit-calendar-picker-indicator {
+					cursor: pointer;
+					filter: invert(1);
+				}
+			}
+			select {
+				width: 100%;
+				padding: 1rem 0.8rem;
+			}
+			.reminder-fields {
+				color: var(--color-text-main);
+
+				label {
+					display: block;
+					margin: 1.2rem 0 0.4rem 0.25rem;
+				}
+				.wrapper {
+					display: flex;
+					align-items: center;
+					gap: 1.2rem;
+
+					button {
+						font-size: 1rem;
+						padding: 0.85rem 1rem;
+						color: var(--color-text-main);
+						background-color: var(--color-border);
+						filter: brightness(1.5);
+						border-radius: 12px;
+						transition: 0.2s;
+
+						&:hover {
+							filter: brightness(1.2);
+						}
+						&:active {
+							transform: scale(0.95);
+						}
+					}
+				}
+			}
+			.mark-imp-checkbox {
+				margin-top: 1.8rem;
+				display: flex;
+				align-items: center;
+				gap: 0.3rem;
+				color: var(--color-text-main);
+				font-size: 1.1rem;
+				user-select: none;
+
+				input {
+					cursor: pointer;
+					opacity: 0.9;
+					width: 2rem;
+					accent-color: var(--color-text-main);
+					transform: scale(1.5);
+				}
+			}
+			.add-todo-btn {
+				font-size: 1.1rem;
+				background-color: var(--color-accent);
+				color: var(--color-text-main);
+				padding: 0.55rem 1.2rem;
+				border-radius: 8px;
+				margin-top: 2.2rem;
+				transition: 0.2s;
+				filter: brightness(1.1);
+
+				&:hover {
+					filter: brightness(0.9);
+				}
+				&:active {
+					transform: scale(0.95);
+				}
+			}
+		}
+
+		.right-part {
+			width: 65%;
+			background-color: var(--color-secondary);
+			padding: 1rem;
+			border-radius: 15px;
+			border: 2px solid var(--color-border);
+
+			.todo-list-items {
+				list-style-type: none;
+
+				li {
+					background-color: var(--color-primary);
+					border: 2px solid var(--color-border);
+					padding: 1.1rem 1rem;
+					border-radius: 12px;
+
+					.upper {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						gap: 1.4rem;
+						font-size: 1rem;
+
+						.todo-details {
+							display: flex;
+							align-items: center;
+							gap: 0.8rem;
+
+							input[type="checkbox"] {
+								width: 1.3rem;
+								height: 1.3rem;
+								accent-color: var(--color-accent);
+							}
+							label {
+								color: var(--color-text-main);
+
+                                .imp-text {
+                                    color: var(--color-text-main);
+                                    background-color: var(--color-btn-red);
+                                    font-size: 0.6rem;
+                                    padding: 0.1rem 0.5rem;
+                                    border-radius: 10px;
+                                }
+							}
+						}
+						.todo-category {
+							font-size: 0.9rem;
+							color: var(--color-text-main);
+							background-color: var(--color-border);
+							padding: 0.4rem 1rem;
+							border-radius: 25px;
+						}
+                        .todo-btns {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.8rem;
+
+                            button {
+                                font-size: 1rem;
+                                color: var(--color-text-main);
+                                background-color: rgb(57, 120, 54);
+                                padding: 0.35rem 1rem;
+                                border-radius: 6px;
+                                transition: 0.2s;
+
+                                &:hover {
+                                    filter: brightness(0.8);
+                                }
+                            }
+
+                            button.delete-btn {
+                                background-color: var(--color-btn-red);
+                            }
+                        }
+					}
+                    .lower {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: var(--color-text-main);
+                        opacity: 0.7;
+                        font-weight: 300;
+                        font-size: 0.8rem;
+                        margin-top: 1rem;
+                    }
+				}
+			}
+		}
+	}
+}

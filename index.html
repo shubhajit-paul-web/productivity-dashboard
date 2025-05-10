@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Productivity Dashboard</title>
+		<!-- Remix icon CDN -->
+		<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+		<!-- Google fonts CDN -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Liter&family=Noto+Serif:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&family=Syne:wght@400..800&display=swap"
+			rel="stylesheet" />
+		<!-- CSS -->
+		<link rel="stylesheet" href="./style.css" />
+		<!-- JS -->
+		<script src="./app.js" defer></script>
+	</head>
+	<body>
+		<!-- navbar -->
+		<nav>
+			<h1>Productivity Dashboard</h1>
+			<button id="change">Change theme</button>
+		</nav>
+		<!-- weather widget -->
+		<section class="weather-widget">
+			<div class="left-part">
+				<p class="date">9 May, 2025</p>
+				<p class="current-time">Sunday, 12:49:15 AM</p>
+				<p class="state">Bhopal (MP)</p>
+			</div>
+			<div class="right-part">
+				<p class="temperature">20°C</p>
+				<p class="weather-status">Light rain</p>
+				<div class="more-weather-details">
+					<p>Precipitation: 35%</p>
+					<p>Humidity: 49%</p>
+					<p>Wind: 10 km/h</p>
+				</div>
+			</div>
+		</section>
+		<!-- features section -->
+		<section class="features-widget">
+			<div class="feature" id="0">
+				<div class="img-bg">
+					<img src="./assets/icons/checklist.png" alt="" />
+				</div>
+				<p>To-Do List</p>
+			</div>
+			<div class="feature" id="1">
+				<div class="img-bg">
+					<img src="./assets/icons/calendar.png" alt="" />
+				</div>
+				<p>Daily Planner</p>
+			</div>
+			<div class="feature" id="2">
+				<div class="img-bg">
+					<img src="./assets/icons/initiative.png" alt="" />
+				</div>
+				<p>Motivation</p>
+			</div>
+			<div class="feature" id="3">
+				<div class="img-bg">
+					<img src="./assets/icons/deadline.png" alt="" />
+				</div>
+				<p>Pomodoro Timer</p>
+			</div>
+			<div class="feature" id="4">
+				<div class="img-bg">
+					<img src="./assets/icons/goal.png" alt="" />
+				</div>
+				<p>Daily Goals</p>
+			</div>
+		</section>
+		<!-- full window for features -->
+		<div class="full-window">
+			<div class="window todo-list-window">
+				<div class="header">
+					<div class="window-title">Your personalized todo list</div>
+					<button class="window-close-btn">Close</button>
+				</div>
+				<div class="todo-list-container">
+					<form class="left-part">
+						<form>
+							<div class="todo-list-header">Add Task</div>
+							<input type="text" placeholder="What do you want to do today?" name="task-name" required />
+							<input type="text" name="" placeholder="Attach File/Link (Optional)" />
+							<div class="input-wrapper">
+								<input type="datetime-local" name="datetime" required />
+								<select name="category" id="category">
+									<option value="" selected disabled>Category</option>
+									<option value="work">Work</option>
+									<option value="personal">Personal</option>
+									<option value="study">Study</option>
+									<option value="learning">Learning</option>
+									<option value="fitness">Fitness</option>
+									<option value="finance">Finance</option>
+									<option value="family">Relationships</option>
+									<option value="family">Family</option>
+									<option value="creative">Creative Projects</option>
+								</select>
+							</div>
+							<div class="reminder-fields" style="display: block; margin-top: 10px">
+								<label for="reminder-time">Pick Reminder Time:</label>
+								<div class="wrapper">
+									<input type="datetime-local" id="reminder-time" />
+									<button type="button" onclick="setReminder()"><i class="ri-notification-3-fill"></i> Save Reminder</button>
+								</div>
+							</div>
+							<div class="mark-imp-checkbox">
+								<input type="checkbox" name="important-task-checkbox" id="imp-checkbox" />
+								<label for="imp-checkbox">Mark as Important</label>
+							</div>
+							<button type="button" class="add-todo-btn">+ Add Task</button>
+						</form>
+					</form>
+					<div class="right-part">
+						<ul class="todo-list-items">
+							<li>
+								<div class="upper">
+									<div class="todo-details">
+                                        <input type="checkbox" name="" id="#0" />
+									    <label for="#0">
+                                            Lorem ipsum dolor sit amet.
+                                            <sup class="imp-text">imp</sup>
+                                        </label>
+                                    </div>
+                                    <!-- <div class="todo-category">
+                                        Personal
+                                    </div> -->
+									<div class="todo-btns">
+                                        <button class="edit-btn">
+                                            <i class="ri-pencil-line"></i> 
+                                            Edit
+                                        </button>
+									    <button class="delete-btn">
+                                            <i class="ri-delete-bin-5-line"></i> Delete
+                                        </button>
+                                    </div>
+								</div>
+                                <div class="lower">
+                                    <p>Date and Time: 21 May, 4:35 AM</p>
+                                    <p>Category: Personal</p>
+                                </div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="window">
+				<div class="header">
+					<div class="window-title">Daily Planner</div>
+					<button class="window-close-btn">Close</button>
+				</div>
+			</div>
+			<div class="window">
+				<div class="header">
+					<div class="window-title">Motivational Quote</div>
+					<button class="window-close-btn">Close</button>
+				</div>
+			</div>
+			<div class="window">
+				<div class="header">
+					<div class="window-title">Pomodoro Timer</div>
+					<button class="window-close-btn">Close</button>
+				</div>
+			</div>
+			<div class="window">
+				<div class="header">
+					<div class="window-title">Daily Goals</div>
+					<button class="window-close-btn">Close</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
