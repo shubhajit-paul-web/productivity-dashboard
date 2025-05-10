@@ -4,7 +4,7 @@
 	--color-accent: #008561;
 	--color-text-main: #eeeeeee6;
 	--color-border: #2a2d35;
-    --color-btn-red: #c23030;
+	--color-btn-red: #c23030;
 }
 
 * {
@@ -28,7 +28,7 @@ body {
 button {
 	cursor: pointer;
 	border: none;
-    user-select: none;
+	user-select: none;
 }
 
 nav {
@@ -62,7 +62,6 @@ nav {
 
 // weather widget - section
 .weather-widget {
-	// height: 16rem;
 	background-color: var(--color-secondary);
 	margin-top: 1.5rem;
 	border-radius: 15px;
@@ -99,7 +98,6 @@ nav {
 			font-size: 3rem;
 			font-weight: 600;
 			line-height: 1;
-			// text-shadow: 0px 0px 2px #0000007a;
 		}
 		.weather-status {
 			font-size: 1.7rem;
@@ -366,13 +364,13 @@ nav {
 							label {
 								color: var(--color-text-main);
 
-                                .imp-text {
-                                    color: var(--color-text-main);
-                                    background-color: var(--color-btn-red);
-                                    font-size: 0.6rem;
-                                    padding: 0.1rem 0.5rem;
-                                    border-radius: 10px;
-                                }
+								.imp-text {
+									color: var(--color-text-main);
+									background-color: var(--color-btn-red);
+									font-size: 0.6rem;
+									padding: 0.1rem 0.5rem;
+									border-radius: 10px;
+								}
 							}
 						}
 						.todo-category {
@@ -382,39 +380,39 @@ nav {
 							padding: 0.4rem 1rem;
 							border-radius: 25px;
 						}
-                        .todo-btns {
-                            display: flex;
-                            align-items: center;
-                            gap: 0.8rem;
+						.todo-btns {
+							display: flex;
+							align-items: center;
+							gap: 0.8rem;
 
-                            button {
-                                font-size: 1rem;
-                                color: var(--color-text-main);
-                                background-color: rgb(57, 120, 54);
-                                padding: 0.35rem 1rem;
-                                border-radius: 6px;
-                                transition: 0.2s;
+							button {
+								font-size: 1rem;
+								color: var(--color-text-main);
+								background-color: rgb(57, 120, 54);
+								padding: 0.35rem 1rem;
+								border-radius: 6px;
+								transition: 0.2s;
 
-                                &:hover {
-                                    filter: brightness(0.8);
-                                }
-                            }
+								&:hover {
+									filter: brightness(0.8);
+								}
+							}
 
-                            button.delete-btn {
-                                background-color: var(--color-btn-red);
-                            }
-                        }
+							button.delete-btn {
+								background-color: var(--color-btn-red);
+							}
+						}
 					}
-                    .lower {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        color: var(--color-text-main);
-                        opacity: 0.7;
-                        font-weight: 300;
-                        font-size: 0.8rem;
-                        margin-top: 1rem;
-                    }
+					.lower {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						color: var(--color-text-main);
+						opacity: 0.7;
+						font-weight: 300;
+						font-size: 0.8rem;
+						margin-top: 1rem;
+					}
 				}
 			}
 		}
