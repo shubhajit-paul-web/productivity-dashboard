@@ -75,21 +75,22 @@
 		</section>
 		<!-- full window for features -->
 		<div class="full-window">
+			<!--====== To-do list ======-->
 			<div class="window todo-list-window">
 				<div class="header">
-					<div class="window-title">Your personalized todo list</div>
+					<div class="window-title">Task Manager</div>
 					<button class="window-close-btn">Close</button>
 				</div>
 				<div class="todo-list-container">
-					<form class="left-part">
-						<form>
+					<div class="left-part">
+						<form class="todo-list-form">
 							<div class="todo-list-header">Add Task</div>
-							<input type="text" placeholder="What do you want to do today?" name="task-name" required />
-							<input type="text" name="" placeholder="Attach File/Link (Optional)" />
+							<input type="text" placeholder="What do you want to do today?" name="taskName" required />
+							<input type="text" name="attachedLink" placeholder="Attach File/Link (Optional)" />
 							<div class="input-wrapper">
 								<input type="datetime-local" name="datetime" required />
-								<select name="category" id="category">
-									<option value="" selected disabled>Category</option>
+								<select name="taskCategory" id="category" required>
+									<option value="" selected disabled>Choose Category</option>
 									<option value="work">Work</option>
 									<option value="personal">Personal</option>
 									<option value="study">Study</option>
@@ -101,49 +102,17 @@
 									<option value="creative">Creative Projects</option>
 								</select>
 							</div>
-							<div class="reminder-fields" style="display: block; margin-top: 10px">
-								<label for="reminder-time">Pick Reminder Time:</label>
-								<div class="wrapper">
-									<input type="datetime-local" id="reminder-time" />
-									<button type="button" onclick="setReminder()"><i class="ri-notification-3-fill"></i> Save Reminder</button>
-								</div>
-							</div>
+							
 							<div class="mark-imp-checkbox">
-								<input type="checkbox" name="important-task-checkbox" id="imp-checkbox" />
+								<input type="checkbox" name="impTaskCheckbox" id="imp-checkbox" />
 								<label for="imp-checkbox">Mark as Important</label>
 							</div>
-							<button type="button" class="add-todo-btn">+ Add Task</button>
+							<button type="submit" class="add-todo-btn">+ Add Task</button>
 						</form>
-					</form>
+					</div>
 					<div class="right-part">
 						<ul class="todo-list-items">
-							<li>
-								<div class="upper">
-									<div class="todo-details">
-                                        <input type="checkbox" name="" id="#0" />
-									    <label for="#0">
-                                            Lorem ipsum dolor sit amet.
-                                            <sup class="imp-text">imp</sup>
-                                        </label>
-                                    </div>
-                                    <!-- <div class="todo-category">
-                                        Personal
-                                    </div> -->
-									<div class="todo-btns">
-                                        <button class="edit-btn">
-                                            <i class="ri-pencil-line"></i> 
-                                            Edit
-                                        </button>
-									    <button class="delete-btn">
-                                            <i class="ri-delete-bin-5-line"></i> Delete
-                                        </button>
-                                    </div>
-								</div>
-                                <div class="lower">
-                                    <p>Date and Time: 21 May, 4:35 AM</p>
-                                    <p>Category: Personal</p>
-                                </div>
-							</li>
+							<div class="todo-empty-msg">You have no tasks at the moment. Add a new task to get started.</div>
 						</ul>
 					</div>
 				</div>
