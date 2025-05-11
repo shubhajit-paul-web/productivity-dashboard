@@ -1,14 +1,22 @@
+// Initializes and manages feature window interactions (open, close)
 function openFeatures() {
 	const featuresElem = document.querySelectorAll(".feature");
 	const windowsElem = document.querySelectorAll(".window");
 	const widowCloseBtns = document.querySelectorAll(".window-close-btn");
 
+	// Open the corresponding window when a feature is clicked
 	featuresElem.forEach(function (feature) {
 		feature.addEventListener("click", function (e) {
-			windowsElem[e.target.id].style.display = "block";
+			const windowId = e.target.dataset.windowid; // Get window ID from data attribute
+			const windowElem = document.querySelector(`#${windowId}`); // Find window by ID
+
+			if (windowElem) {
+				windowElem.style.display = "block";
+			}
 		});
 	});
 
+	// Close window when the close button is clicked
 	widowCloseBtns.forEach(function (btn, index) {
 		btn.addEventListener("click", function () {
 			windowsElem[index].style.display = "none";
@@ -18,48 +26,49 @@ function openFeatures() {
 
 openFeatures();
 
-// ! Handle todo list
+// Handle todo list functionality (add, display, delete, etc.)
 function handleTodoList() {
 	const STORAGE_KEY = "todo-list-data";
 
 	// Format the date and time
 	function formatDateTime(datetime) {
 		const date = new Date(datetime);
-
-		const formatted = date.toLocaleString("en-US", {
+		return date.toLocaleString("en-US", {
 			day: "numeric",
 			month: "short",
 			hour: "numeric",
 			minute: "2-digit",
 			hour12: true,
 		});
-
-		return formatted;
 	}
 
 	const todoForm = document.querySelector(".todo-list-form");
 	const todoListItemsContainer = document.querySelector(".todo-list-items");
 
-	// Handle todo checked
+	// Handle changes to the todo checkbox (checked/unchecked)
 	function handleTodoCheckbox() {
 		let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
 		let todoCheckboxes = document.querySelectorAll(".todo-check-box");
 
-		todoCheckboxes.forEach(function (checkbox) {
-			checkbox.addEventListener("change", function (e) {
-				const todoID = e.target.id.slice(1);
-				let todoIndex = todoListData.findIndex((item) => item.id == todoID);
+		if (todoCheckboxes.length) {
+			todoCheckboxes.forEach(function (checkbox) {
+				checkbox.addEventListener("change", function (e) {
+					const todoID = e.target.id.slice(1);
+					let todoIndex = todoListData.findIndex((item) => item.id == todoID);
 
-				todoListData[todoIndex].isTodoChecked = e.target.checked;
+					if (todoIndex !== -1) {
+						todoListData[todoIndex].isTodoChecked = e.target.checked;
 
-				localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
-				displayData();
+						localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
+						displayData(); // Refresh the displayed data
+					}
+				});
 			});
-		});
+		}
 	}
 	handleTodoCheckbox();
 
-	// Load todo data
+	// Display todo data from localStorage
 	function displayData() {
 		let todoData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
@@ -83,7 +92,7 @@ function handleTodoList() {
                         </div>
 				        <div class="todo-btns">
 							${todoItem.attachedLink ? `<a href="${todoItem.attachedLink}" target="_blank" title="Attached link"><i class="ri-links-fill"></i></a>` : ""}
-                            <button class="edit-btn" ${todoItem.isTodoChecked ? "disabled" : ""} title="${todoItem.isTodoChecked ? 'Task completed – editing is disabled.' : 'Click to edit this task.'}"><i class="ri-pencil-line"></i> Edit</button>
+                            <button class="edit-btn" ${todoItem.isTodoChecked ? "disabled" : ""} title="${todoItem.isTodoChecked ? "Task completed – editing is disabled." : "Click to edit this task."}"><i class="ri-pencil-line"></i> Edit</button>
 		                    <button class="delete-btn"><i class="ri-delete-bin-5-line"></i> Delete</button>
                         </div>
 		            </div>
@@ -99,68 +108,56 @@ function handleTodoList() {
 		}
 		handleTodoCheckbox();
 	}
-
 	displayData();
 
-	// TODO: Add todo
+	// Handle adding a new todo item
 	function addTodo() {
 		todoForm.addEventListener("submit", function (e) {
 			e.preventDefault();
 
-			// All todo list data
-			let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
+			const {taskName, attachedLink, datetime, taskCategory, impTaskCheckbox} = e.target;
 
-			let taskNameInput = e.target.taskName;
-			let attachedLinkInput = e.target.attachedLink;
-			let datetimeInput = e.target.datetime;
-			let taskCategoryInput = e.target.taskCategory;
-			let impTaskCheckbox = e.target.impTaskCheckbox;
+			// Check if all required fields are filled
+			if (taskName.value.trim() && taskCategory.value && datetime.value) {
+				let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
 
-			if (taskNameInput.value.trim() && taskCategoryInput.value && datetimeInput.value) {
 				todoListData.push({
 					id: Date.now(),
-					task: taskNameInput.value.trim(),
+					task: taskName.value.trim(),
 					isTodoChecked: false,
-					attachedLink: attachedLinkInput.value.trim(),
-					datetime: formatDateTime(datetimeInput.value),
-					category: taskCategoryInput.value,
+					attachedLink: attachedLink.value.trim(),
+					datetime: formatDateTime(datetime.value),
+					category: taskCategory.value,
 					isImportant: impTaskCheckbox.checked,
 				});
 
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
-				displayData();
-				deleteTodo();
+				displayData(); // Refresh the displayed data
+				deleteTodo(); // Enable delete functionality for the new todo
 			}
 
-			// Reset all input fields values
-			taskNameInput.value = "";
-			attachedLinkInput.value = "";
-			datetimeInput.value = "";
-			taskCategoryInput.value = "";
+			// Reset form input fields after adding a todo
+			taskName.value = "";
+			attachedLink.value = "";
+			datetime.value = "";
+			taskCategory.value = "";
 			impTaskCheckbox.checked = false;
 		});
 	}
 	addTodo();
 
-	// Delete todo
+	// Handle deleting a todo item
 	function deleteTodo() {
-		// All todo list data
-		let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
+		todoListItemsContainer.addEventListener("click", function (e) {
+			if (e.target.classList.contains("delete-btn")) {
+				const todoId = e.target.closest("li").getAttribute("data-id");
+				let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? [];
 
-		if (todoListData.length) {
-			todoListItemsContainer.addEventListener("click", function (e) {
-				if (e.target.classList.contains("delete-btn")) {
-					const todoId = e.target.closest("li").getAttribute("data-id");
-
-					let todoListData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-					todoListData = todoListData.filter((item) => item.id != todoId);
-
-					localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
-					displayData();
-				}
-			});
-		}
+				todoListData = todoListData.filter((item) => item.id != todoId);
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
+				displayData(); // Refresh the displayed data
+			}
+		});
 	}
 	deleteTodo();
 }
