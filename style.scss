@@ -295,7 +295,7 @@ nav {
 					accent-color: var(--color-text-main);
 				}
 			}
-			.add-todo-btn {
+			.add-todo-btn, .edit-todo-btn {
 				font-size: 1.1rem;
 				background-color: var(--color-accent);
 				color: var(--color-text-main);
@@ -311,6 +311,16 @@ nav {
 				&:active {
 					transform: scale(0.95);
 				}
+				&:disabled {
+					cursor: not-allowed;
+					opacity: 0.4;
+				}
+			}
+			.edit-todo-btn {
+				background-color: var(--color-link);
+				filter: brightness(1.5);
+				margin-left: 0.5rem;
+				display: none;
 			}
 		}
 
@@ -337,7 +347,7 @@ nav {
 
 			button:disabled {
 				cursor: not-allowed;
-				opacity: 0.45;
+				opacity: 0.45; 
 			}
 
 			.todo-list-items {
@@ -407,7 +417,7 @@ nav {
 							a {
 								font-size: 1rem;
 								color: var(--color-text-main);
-								background-color: rgb(57, 120, 54);
+								background-color: #397836;
 								padding: 0.35rem 1rem;
 								border-radius: 6px;
 								transition: 0.2s;
@@ -431,6 +441,9 @@ nav {
 								i {
 									pointer-events: none;
 								}
+							}
+							button.edit-btn i {
+								pointer-events: none;
 							}
 						}
 					}

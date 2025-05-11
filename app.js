@@ -97,7 +97,7 @@ function handleTodoList() {
                         </div>
 		            </div>
                     <div class="lower">
-                        <p>Date and Time: ${todoItem.datetime}</p>
+                        <p>Date and Time: ${formatDateTime(todoItem.datetime)}</p>
                         <p>Category: ${todoItem.category}</p>
                     </div>	
                 `;
@@ -126,13 +126,14 @@ function handleTodoList() {
 					task: taskName.value.trim(),
 					isTodoChecked: false,
 					attachedLink: attachedLink.value.trim(),
-					datetime: formatDateTime(datetime.value),
+					datetime: datetime.value,
 					category: taskCategory.value,
 					isImportant: impTaskCheckbox.checked,
 				});
 
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(todoListData));
 				displayData(); // Refresh the displayed data
+				editTodo(); // Enable edit functionality for the new todo
 				deleteTodo(); // Enable delete functionality for the new todo
 			}
 
@@ -160,6 +161,61 @@ function handleTodoList() {
 		});
 	}
 	deleteTodo();
+
+	// Handle editing a todo item
+	function editTodo() {
+		todoListItemsContainer.addEventListener("click", function (e) {
+			if (e.target.classList.contains("edit-btn")) {
+				const addTodoBtn = document.querySelector(".add-todo-btn");
+				const doneBtn = document.querySelector(".edit-todo-btn");
+				// Get todos data from localstorage and todoID
+				let todoData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+				let todoID = e.target.closest("li").dataset.id;
+				// input fields
+				const form = document.querySelector(".todo-list-form");
+				const {taskName, attachedLink, datetime, taskCategory, impTaskCheckbox} = form;
+
+				const todoIndex = todoData.findIndex((item) => item.id == todoID);
+
+				if (todoIndex !== -1) {
+					let todoItem = todoData[todoIndex];
+					taskName.value = todoItem.task;
+					attachedLink.value = todoItem.attachedLink;
+					datetime.value = todoItem.datetime;
+					taskCategory.value = todoItem.category;
+					impTaskCheckbox.checked = todoItem.isImportant;
+
+					addTodoBtn.disabled = true;
+					doneBtn.style.display = "inline-block";
+
+					doneBtn.addEventListener("click", function () {
+						if (taskName.value && taskCategory.value && datetime.value) {
+							// set updated values
+							todoItem.task = taskName.value;
+							todoItem.attachedLink = attachedLink.value;
+							todoItem.datetime = datetime.value;
+							todoItem.category = taskCategory.value;
+							todoItem.isImportant = impTaskCheckbox.checked;
+
+							localStorage.setItem(STORAGE_KEY, JSON.stringify(todoData));
+							addTodoBtn.disabled = false;
+							doneBtn.style.display = "none";
+
+							// reset todo input-fields values
+							taskName.value = "";
+							attachedLink.value = "";
+							datetime.value = "";
+							taskCategory.value = "";
+							impTaskCheckbox.checked = "";
+
+							displayData(); // Refresh the displayed data
+						}
+					});
+				}
+			}
+		});
+	}
+	editTodo();
 }
 
 handleTodoList();

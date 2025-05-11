@@ -269,7 +269,7 @@ nav button:active {
   height: 1.2rem;
   accent-color: var(--color-text-main);
 }
-.window.todo-list-window .todo-list-container .left-part .add-todo-btn {
+.window.todo-list-window .todo-list-container .left-part .add-todo-btn, .window.todo-list-window .todo-list-container .left-part .edit-todo-btn {
   font-size: 1.1rem;
   background-color: var(--color-accent);
   color: var(--color-text-main);
@@ -279,11 +279,21 @@ nav button:active {
   transition: 0.2s;
   filter: brightness(1.1);
 }
-.window.todo-list-window .todo-list-container .left-part .add-todo-btn:hover {
+.window.todo-list-window .todo-list-container .left-part .add-todo-btn:hover, .window.todo-list-window .todo-list-container .left-part .edit-todo-btn:hover {
   filter: brightness(0.9);
 }
-.window.todo-list-window .todo-list-container .left-part .add-todo-btn:active {
+.window.todo-list-window .todo-list-container .left-part .add-todo-btn:active, .window.todo-list-window .todo-list-container .left-part .edit-todo-btn:active {
   transform: scale(0.95);
+}
+.window.todo-list-window .todo-list-container .left-part .add-todo-btn:disabled, .window.todo-list-window .todo-list-container .left-part .edit-todo-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.window.todo-list-window .todo-list-container .left-part .edit-todo-btn {
+  background-color: var(--color-link);
+  filter: brightness(1.5);
+  margin-left: 0.5rem;
+  display: none;
 }
 .window.todo-list-window .todo-list-container .right-part {
   width: 65%;
@@ -369,7 +379,7 @@ nav button:active {
 .window.todo-list-window .todo-list-container .right-part .todo-list-items li .upper .todo-btns a {
   font-size: 1rem;
   color: var(--color-text-main);
-  background-color: rgb(57, 120, 54);
+  background-color: #397836;
   padding: 0.35rem 1rem;
   border-radius: 6px;
   transition: 0.2s;
@@ -392,6 +402,9 @@ nav button:active {
   background-color: var(--color-btn-red);
 }
 .window.todo-list-window .todo-list-container .right-part .todo-list-items li .upper .todo-btns button.delete-btn i {
+  pointer-events: none;
+}
+.window.todo-list-window .todo-list-container .right-part .todo-list-items li .upper .todo-btns button.edit-btn i {
   pointer-events: none;
 }
 .window.todo-list-window .todo-list-container .right-part .todo-list-items li .lower {
