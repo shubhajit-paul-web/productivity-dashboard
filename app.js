@@ -254,3 +254,24 @@ function handleTodoList() {
 }
 
 handleTodoList();
+
+// Handling Motivational Quotes
+function handleQuote() {
+	const quoteElem = document.querySelector(".quote");
+	const authorElem = document.querySelector(".author");
+
+	async function getQuote() {
+		const response = await fetch("https://dummyjson.com/quotes/random");
+		
+		if (response.ok) {
+			const quote = await response.json();
+	
+			quoteElem.textContent = `"${quote.quote}"`;
+			authorElem.textContent = `- ${quote.author}`;
+		}
+	}
+
+	getQuote();
+}
+
+handleQuote();

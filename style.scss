@@ -7,6 +7,8 @@
 	--color-border: #2a2d35;
 	--color-btn-red: #c23030;
 	--color-link: #303239;
+	// quote box colors
+	--color-quote-box: #3B1C32; // #393E46
 	color-scheme: light dark;
 }
 
@@ -212,8 +214,6 @@ nav {
 
 // To-Do List Window Styles
 .window.todo-list-window {
-	display: block;
-
 	.todo-list-container {
 		width: 100%;
 		display: flex;
@@ -458,6 +458,57 @@ nav {
 						margin-top: 1rem;
 					}
 				}
+			}
+		}
+	}
+}
+
+// Daily Planner Window Styles
+// .window.daily-planner-window {
+// 	display: block;
+// }
+
+// Motivational Quote Window Styles
+.window.motivational-quote-window {
+	display: block;
+
+	.motivational-quote-container {
+		// border: 1px solid red;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.motivational-quote-box {
+			min-width: 33rem;
+			max-width: 40rem;
+			border-radius: 15px;
+			background-color: var(--color-quote-box);
+			box-shadow: 0px 0px 110px 40px var(--color-quote-box);
+			border: 2px solid #ffffff1e;
+			margin-top: 5rem;
+			padding: 2rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 2rem;
+
+			h2 {
+				font-size: 1.2rem;
+				background-color: #ffffff80;
+				color: var(--color-quote-box);
+				padding: 0.2rem 0.8rem;
+				border-radius: 6px;
+				width: fit-content;
+				margin-bottom: 1.8rem;
+			}
+			.quote, .author {
+				font-size: 1.25rem;
+				opacity: 0.7;
+				font-style: italic;
+			}
+			.author {
+				font-style: normal;
+				text-align: right;
 			}
 		}
 	}

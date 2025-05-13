@@ -6,6 +6,7 @@
   --color-border: #2a2d35;
   --color-btn-red: #c23030;
   --color-link: #303239;
+  --color-quote-box: #3B1C32;
   color-scheme: light dark;
 }
 
@@ -184,9 +185,6 @@ nav button:active {
   transform: scale(0.94);
 }
 
-.window.todo-list-window {
-  display: block;
-}
 .window.todo-list-window .todo-list-container {
   width: 100%;
   display: flex;
@@ -416,4 +414,46 @@ nav button:active {
   font-weight: 300;
   font-size: 0.8rem;
   margin-top: 1rem;
+}
+
+.window.motivational-quote-window {
+  display: block;
+}
+.window.motivational-quote-window .motivational-quote-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.window.motivational-quote-window .motivational-quote-container .motivational-quote-box {
+  min-width: 33rem;
+  max-width: 40rem;
+  border-radius: 15px;
+  background-color: var(--color-quote-box);
+  box-shadow: 0px 0px 110px 40px var(--color-quote-box);
+  border: 2px solid rgba(255, 255, 255, 0.1176470588);
+  margin-top: 5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.window.motivational-quote-window .motivational-quote-container .motivational-quote-box h2 {
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.5019607843);
+  color: var(--color-quote-box);
+  padding: 0.2rem 0.8rem;
+  border-radius: 6px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 1.8rem;
+}
+.window.motivational-quote-window .motivational-quote-container .motivational-quote-box .quote, .window.motivational-quote-window .motivational-quote-container .motivational-quote-box .author {
+  font-size: 1.25rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+.window.motivational-quote-window .motivational-quote-container .motivational-quote-box .author {
+  font-style: normal;
+  text-align: right;
 }/*# sourceMappingURL=style.css.map */
