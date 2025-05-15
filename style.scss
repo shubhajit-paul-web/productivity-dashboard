@@ -8,7 +8,7 @@
 	--color-btn-red: #c23030;
 	--color-link: #303239;
 	// quote box colors
-	--color-quote-box: #3B1C32; // #393E46
+	--color-quote-box: #3b1c32; // #393E46
 	color-scheme: light dark;
 }
 
@@ -66,7 +66,7 @@ nav {
 	}
 }
 
-// weather widget - section
+// ******| weather widget - section |******
 .weather-widget {
 	background-color: var(--color-secondary);
 	margin-top: 1.5rem;
@@ -170,7 +170,7 @@ nav {
 // Full Window Modal for Features
 .full-window {
 	.window {
-		width: 100vw;
+		width: 100%;
 		min-height: 100vh;
 		background-color: var(--color-primary);
 		position: absolute;
@@ -212,7 +212,7 @@ nav {
 	}
 }
 
-// To-Do List Window Styles
+// ******| To-Do List Window Styles |******
 .window.todo-list-window {
 	.todo-list-container {
 		width: 100%;
@@ -295,7 +295,8 @@ nav {
 					accent-color: var(--color-text-main);
 				}
 			}
-			.add-todo-btn, .edit-todo-btn {
+			.add-todo-btn,
+			.edit-todo-btn {
 				font-size: 1.1rem;
 				background-color: var(--color-accent);
 				color: var(--color-text-main);
@@ -347,7 +348,7 @@ nav {
 
 			button:disabled {
 				cursor: not-allowed;
-				opacity: 0.45; 
+				opacity: 0.45;
 			}
 
 			.todo-list-items {
@@ -463,15 +464,49 @@ nav {
 	}
 }
 
-// Daily Planner Window Styles
-// .window.daily-planner-window {
-// 	display: block;
-// }
-
-// Motivational Quote Window Styles
-.window.motivational-quote-window {
+// ******| Daily Planner Window Styles |******
+.window.daily-planner-window {
 	display: block;
 
+	.daily-planner-container {
+		background-color: var(--color-secondary);
+		border-radius: 12px;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		padding: 20px;
+
+		.daily-planner-time {
+			background-color: var(--color-primary);
+			padding: 0.7rem;
+			border-radius: 8px;
+
+			.time {
+				line-height: 1;
+				opacity: 0.8;
+				font-size: 0.9rem;
+				margin-bottom: 0.6rem;
+			}
+			.planner-input {
+				font-size: 1.2rem;
+				width: 100%;
+				padding-left: 1.5rem;
+				background-color: transparent;
+				border: none;
+				outline: none;
+				opacity: 0.8;
+
+				&::placeholder {
+					font-size: 2rem;
+					letter-spacing: 0.5px;
+				}
+			}
+		}
+	}
+}
+
+// ******| Motivational Quote Window Styles |******
+.window.motivational-quote-window {
 	.motivational-quote-container {
 		// border: 1px solid red;
 		display: flex;
@@ -501,7 +536,8 @@ nav {
 				width: fit-content;
 				margin-bottom: 1.8rem;
 			}
-			.quote, .author {
+			.quote,
+			.author {
 				font-size: 1.25rem;
 				opacity: 0.7;
 				font-style: italic;

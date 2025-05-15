@@ -255,6 +255,22 @@ function handleTodoList() {
 
 handleTodoList();
 
+// Handling Daily Planner
+function handleDailyPlanner() {
+	const plannerContainer = document.querySelector(".daily-planner-container");
+
+	Array.from({length: 18}).forEach(function(_, index) {
+		plannerContainer.innerHTML += `
+			<div class="daily-planner-time" data-id="#${index}">
+				<div class="time">${6 + index}:00 - ${7 + index}:00</div>
+				<input placeholder="...." class="planner-input"></input>
+			</div>
+		`;
+	});
+}
+
+handleDailyPlanner();
+
 // Handling Motivational Quotes
 function handleQuote() {
 	const quoteElem = document.querySelector(".quote");
