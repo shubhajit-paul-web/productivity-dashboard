@@ -138,7 +138,7 @@ function handleTodoList() {
 
 				// Fireworks animation
 				(function () {
-					const duration = 3 * 1000,
+					const duration = 2 * 1000,
 						animationEnd = Date.now() + duration,
 						defaults = {startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999};
 
@@ -257,15 +257,67 @@ handleTodoList();
 
 // Handling Daily Planner
 function handleDailyPlanner() {
-	const plannerContainer = document.querySelector(".daily-planner-container");
+	// 12-hour format with AM/PM
+	function formatHour(hour) {
+		const suffix = hour >= 12 ? "PM" : "AM";
+		const displayHour = hour % 12 || 12;
+		return `${displayHour}:00 ${suffix}`;
+	}
 
-	Array.from({length: 18}).forEach(function(_, index) {
+	// Debounce function
+	function debounce(fn, delay) {
+		let timerID;
+
+		return function(...args) {
+			clearTimeout(timerID);
+			timerID = setTimeout(() => {
+				fn(...args);
+			}, delay);
+		}
+	}
+
+	// Check if "planner-data" key is available in localstorage is not
+	if (!localStorage.getItem("planner-data")) {
+		let fields = Array.from({ length: 18 }).map((_, index) => {
+			return {id: index, value: null};
+		});
+		localStorage.setItem("planner-data", JSON.stringify(fields));
+	}
+
+	// Adding input fields
+	const plannerContainer = document.querySelector(".daily-planner-container");
+	const plannerData = JSON.parse(localStorage.getItem("planner-data")) ?? [];
+
+	plannerData.forEach(function (inputElem, index) {
+		const startHour = 6 + index;
+		const endHour = startHour + 1;
 		plannerContainer.innerHTML += `
 			<div class="daily-planner-time" data-id="#${index}">
-				<div class="time">${6 + index}:00 - ${7 + index}:00</div>
-				<input placeholder="...." class="planner-input"></input>
+				<div class="time">${formatHour(startHour)} - ${formatHour(endHour)}</div>
+				<input placeholder="...." class="planner-input" data-field="${index}" value="${inputElem.value ?? ""}"></input>
 			</div>
 		`;
+	});
+
+	// Push data into localstorage
+	const pushData = debounce(function(inputField) {
+		const inputID = inputField.dataset.field;
+		const storedData = JSON.parse(localStorage.getItem("planner-data")) ?? [];
+
+		storedData[inputID].value = inputField.value.trim();
+
+		localStorage.setItem("planner-data", JSON.stringify(storedData));
+
+		console.log(storedData);
+		
+	}, 500);
+	
+	const plannerInputElems = document.querySelectorAll(".planner-input");
+
+	plannerInputElems.forEach(function(inputElem) {
+		inputElem.addEventListener("input", function(e) {
+			pushData(e.target);
+		});
 	});
 }
 
@@ -278,10 +330,10 @@ function handleQuote() {
 
 	async function getQuote() {
 		const response = await fetch("https://dummyjson.com/quotes/random");
-		
+
 		if (response.ok) {
 			const quote = await response.json();
-	
+
 			quoteElem.textContent = `"${quote.quote}"`;
 			authorElem.textContent = `- ${quote.author}`;
 		}
