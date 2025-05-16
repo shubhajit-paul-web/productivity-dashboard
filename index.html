@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
 		<title>Productivity Dashboard</title>
 		<!-- Remix icon CDN -->
 		<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
@@ -119,18 +120,15 @@
 					</div>
 				</div>
 			</div>
+			<!--====== Daily Planner ======-->
 			<div class="window daily-planner-window" id="window2">
 				<div class="header">
 					<div class="window-title">Daily Planner</div>
 					<button class="window-close-btn">Close</button>
 				</div>
-				<div class="daily-planner-container">
-					<!-- <div class="daily-planner-time">
-						<div class="time">6:00 - 7:00</div>
-						<input placeholder="...." class="planner-input"></input>
-					</div> -->
-				</div>
+				<div class="daily-planner-container"></div>
 			</div>
+			<!--====== Motivational Quotes ======-->
 			<div class="window motivational-quote-window" id="window3">
 				<div class="header">
 					<div class="window-title">Motivational Quote</div>
@@ -146,10 +144,23 @@
 					</div>
 				</div>
 			</div>
-			<div class="window" id="window4">
+			<!--====== Pomodoro Timer ======-->
+			<div class="window pomodoro-timer-window" id="window4">
 				<div class="header">
 					<div class="window-title">Pomodoro Timer</div>
 					<button class="window-close-btn">Close</button>
+				</div>
+				<div class="pomodoro-timer-container">
+					<audio src="./assets/sounds/notification-5-337824.mp3" class="notification-audio"></audio>
+					<div class="pomodoro-timer-box">
+						<div class="session-indicator">Work Session</div>
+						<div class="timer">25:00</div>
+						<div class="btns">
+							<button class="start-btn">Start</button>
+							<button class="pause-btn" disabled>Pause</button>
+							<button class="reset-btn">Reset</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="window" id="window5">

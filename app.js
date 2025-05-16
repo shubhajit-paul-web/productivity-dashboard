@@ -268,17 +268,17 @@ function handleDailyPlanner() {
 	function debounce(fn, delay) {
 		let timerID;
 
-		return function(...args) {
+		return function (...args) {
 			clearTimeout(timerID);
 			timerID = setTimeout(() => {
 				fn(...args);
 			}, delay);
-		}
+		};
 	}
 
 	// Check if "planner-data" key is available in localstorage is not
 	if (!localStorage.getItem("planner-data")) {
-		let fields = Array.from({ length: 18 }).map((_, index) => {
+		let fields = Array.from({length: 18}).map((_, index) => {
 			return {id: index, value: null};
 		});
 		localStorage.setItem("planner-data", JSON.stringify(fields));
@@ -300,7 +300,7 @@ function handleDailyPlanner() {
 	});
 
 	// Push data into localstorage
-	const pushData = debounce(function(inputField) {
+	const pushData = debounce(function (inputField) {
 		const inputID = inputField.dataset.field;
 		const storedData = JSON.parse(localStorage.getItem("planner-data")) ?? [];
 
@@ -309,13 +309,12 @@ function handleDailyPlanner() {
 		localStorage.setItem("planner-data", JSON.stringify(storedData));
 
 		console.log(storedData);
-		
 	}, 500);
-	
+
 	const plannerInputElems = document.querySelectorAll(".planner-input");
 
-	plannerInputElems.forEach(function(inputElem) {
-		inputElem.addEventListener("input", function(e) {
+	plannerInputElems.forEach(function (inputElem) {
+		inputElem.addEventListener("input", function (e) {
 			pushData(e.target);
 		});
 	});
@@ -343,3 +342,97 @@ function handleQuote() {
 }
 
 handleQuote();
+
+// Handling Pomodoro Timer
+function handlePomodoroTimer() {
+	const timerBox = document.querySelector(".pomodoro-timer-box");
+	const sessionIndicator = document.querySelector(".session-indicator");
+	const timerElem = document.querySelector(".timer");
+	const notificationAudio = document.querySelector(".notification-audio");
+
+	const startBtn = document.querySelector(".start-btn");
+	const pauseBtn = document.querySelector(".pause-btn");
+	const resetBtn = document.querySelector(".reset-btn");
+
+	// configurations
+	const WORK_DURATION = 1500; // 25 minutes
+	const BREAK_DURATION = 300; // 5 minutes
+	let totalSeconds = WORK_DURATION;
+	let timerID = null;
+	let sessionType = "work"; // "work" or "break"
+
+	// Update timer UI
+	function updateTimerDisplay() {
+		const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+		const seconds = String(totalSeconds % 60).padStart(2, "0");
+		timerElem.textContent = `${minutes}:${seconds}`;
+	}
+
+	// Set session info
+	function setSession(type) {
+		sessionType = type;
+		totalSeconds = type === "work" ? WORK_DURATION : BREAK_DURATION;
+		sessionIndicator.textContent = type === "work" ? "Work Session" : "Take a Break";
+		sessionIndicator.classList.toggle("session-indicator-break", type === "break");
+		updateTimerDisplay();
+	}
+
+	// Start timer
+	function startTimer() {
+		playNotification();
+
+		clearInterval(timerID);
+		timerBox.classList.add("pomodoro-active");
+		startBtn.disabled = true;
+		pauseBtn.disabled = false;
+
+		timerID = setInterval(() => {
+			if (totalSeconds > 0) {
+				totalSeconds--;
+				updateTimerDisplay();
+			} else {
+				clearInterval(timerID);
+				timerBox.classList.remove("pomodoro-active");
+				startBtn.disabled = false;
+				pauseBtn.disabled = true;
+
+				// Toggle session
+				const nextSession = sessionType === "work" ? "break" : "work";
+				setSession(nextSession);
+			}
+		}, 1000);
+	}
+
+	// Pause timer
+	function pauseTimer() {
+		clearInterval(timerID);
+		startBtn.disabled = false;
+		pauseBtn.disabled = true;
+	}
+
+	// Reset timer
+	function resetTimer() {
+		clearInterval(timerID);
+		setSession("work");
+		timerBox.classList.remove("pomodoro-active");
+		startBtn.disabled = false;
+		pauseBtn.disabled = true;
+	}
+
+	// Audio
+	function playNotification() {
+		notificationAudio.currentTime = 0.2;
+		notificationAudio.play();
+	}
+
+	// Init
+	setSession("work");
+	updateTimerDisplay();
+
+	// Handling timer buttons events
+	startBtn.addEventListener("click", startTimer);
+	pauseBtn.addEventListener("click", pauseTimer);
+	resetBtn.addEventListener("click", resetTimer);
+}
+
+handlePomodoroTimer();

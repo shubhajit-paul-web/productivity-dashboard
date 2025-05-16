@@ -6,6 +6,7 @@
   --color-border: #2a2d35;
   --color-btn-red: #c23030;
   --color-link: #303239;
+  --color-session-indicator: #175996;
   --color-quote-box: #3b1c32;
   color-scheme: light dark;
 }
@@ -430,6 +431,8 @@ nav button:active {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
+  overflow-y: auto;
+  height: calc(80vh - 1rem);
 }
 .window.daily-planner-window .daily-planner-container .daily-planner-time {
   background-color: var(--color-primary);
@@ -512,4 +515,86 @@ nav button:active {
 .window.motivational-quote-window .motivational-quote-container .motivational-quote-box .author {
   font-style: normal;
   text-align: right;
+}
+
+.window.pomodoro-timer-window {
+  display: block;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box {
+  width: 34rem;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 5px solid var(--color-secondary);
+  padding: 3rem;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .session-indicator {
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: var(--color-accent);
+  padding: 0.45rem 1.3rem;
+  border-radius: 5px;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .session-indicator.session-indicator-break {
+  background-color: var(--color-session-indicator);
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .timer {
+  font-size: 8.5rem;
+  opacity: 0.85;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text-main);
+  margin-top: 1rem;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .btns button {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  background-color: var(--color-link);
+  padding: 0.62rem 1.5rem;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0px var(--color-secondary);
+  transition: 0.2s;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .btns button:hover {
+  opacity: 0.85;
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .btns button:active {
+  box-shadow: 0px 0px 0px var(--color-secondary);
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-timer-box .btns button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+.window.pomodoro-timer-window .pomodoro-timer-container .pomodoro-active {
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.15), 0 0 40px rgba(0, 229, 255, 0.12), 0 0 60px rgba(137, 255, 253, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.03);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 255, 198, 0.2), 0 0 40px rgba(0, 229, 255, 0.15), 0 0 60px rgba(137, 255, 253, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.02);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(0, 255, 198, 0.4), 0 0 70px rgba(0, 229, 255, 0.3), 0 0 100px rgba(137, 255, 253, 0.2), inset 0 0 50px rgba(255, 255, 255, 0.03);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 198, 0.2), 0 0 40px rgba(0, 229, 255, 0.15), 0 0 60px rgba(137, 255, 253, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.02);
+  }
 }/*# sourceMappingURL=style.css.map */
